@@ -1,0 +1,9 @@
+let dias = prompt("que dia é hoje?:");
+
+let hoje;
+if (dias === "sábado" || dias === "domingo"){
+    hoje = "hoje é fim de semana.";
+} else {
+    hoje = "hoje é dia de semana.";
+}
+console.log(hoje)
