@@ -1,0 +1,88 @@
+# Lista dos dias úteis
+dias_uteis = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"]
+
+print("Contando os dias úteis até o fim de semana:")
+print("-" * 40) # Imprime uma linha divisória para clareza
+
+# Loop for para percorrer a lista
+for dia in dias_uteis:
+    # Imprime o dia atual. O 'f' antes da string permite usar variáveis dentro de chaves {}.
+    print(f"Dia atual: {dia} - Mais perto do fim de semana!")
+
+print("-" * 40)
+print("FIM DE SEMANA CHEGOU! Aproveite o descanso! 🎉")
+
+# 1. A lista de preços dos itens no carrinho
+precos_compras = [12.50, 5.99, 24.90, 3.15, 8.00, 15.45]
+
+# 2. Uma variável para guardar o total. Começamos do zero.
+total_da_compra = 0.0
+
+print("--- Calculando o Total da Compra ---")
+
+# 3. O Loop for: Itera sobre cada 'preco' na lista 'precos_compras'
+for preco in precos_compras:
+    # Mostra o preço que está sendo adicionado no momento
+    print(f"Adicionando R$ {preco:.2f}")
+
+    # Acumula o valor: Adiciona o 'preco' atual ao 'total_da_compra'
+    total_da_compra = total_da_compra + preco
+    # Ou, usando a forma abreviada mais comum: total_da_compra += preco
+
+print("------------------------------------")
+
+# 4. Imprime o resultado final (formatado com duas casas decimais)
+print(f"Total a pagar: R$ {total_da_compra:.2f}")
+
+# Definimos o número inicial de mensagens não lidas
+mensagens_nao_lidas = 5
+
+print("--- Verificando o Celular ---")
+
+# O loop 'while' continua ENQUANTO a condição for verdadeira
+while mensagens_nao_lidas > 0:
+    print(f"\nVocê tem {mensagens_nao_lidas} mensagens novas. Lendo e respondendo...")
+
+    # Simula o processamento de uma mensagem
+    # Reduzimos o contador de mensagens não lidas
+    mensagens_nao_lidas = mensagens_nao_lidas - 1
+    # Forma abreviada, mais comum: mensagens_nao_lidas -= 1
+
+    # Condição para mensagens restantes
+    if mensagens_nao_lidas > 0:
+        print(f"Ok, falta(m) apenas {mensagens_nao_lidas} para terminar.")
+    else:
+        # Quando o contador chega a zero, esta é a última execução do loop
+        print("Mensagem respondida. Não há mais mensagens para processar.")
+
+
+print("\n--- FIM ---")
+print("Caixa de entrada vazia! Você está em dia com suas mensagens. ✅")
+
+# 1. Definir as variáveis do problema
+meta_de_compra = 100.00   # O valor que você precisa alcançar
+economizado_por_semana = 10.00 # O quanto você economiza a cada ciclo
+poupanca_atual = 0.00     # O seu saldo inicial (começa em zero)
+contador_semanas = 0      # Contador para saber quantas semanas se passaram
+
+print(f"Meta de economia: R$ {meta_de_compra:.2f}")
+print("--- Iniciando a simulação de economia ---")
+
+# 2. O Loop 'while': Continua enquanto a poupança for menor que a meta
+while poupanca_atual < meta_de_compra:
+    # Aumenta o contador de semanas
+    contador_semanas += 1
+
+    # Adiciona a economia da semana ao saldo
+    poupanca_atual += economizado_por_semana
+
+    # Imprime o progresso da semana
+    print(f"Semana {contador_semanas}: Poupança atualizada para R$ {poupanca_atual:.2f}")
+
+# 3. Resultado final (executado assim que o loop para)
+print("\n-------------------------------------------")
+print(f"OBJETIVO ALCANÇADO! 🎉")
+print(f"Você precisará de {contador_semanas} semanas para comprar o item de R$ {meta_de_compra:.2f}.")
+
+lista_presenca = ["Ana", "Bruno", "Carla", "Daniel", "Eduarda"]
+aluno_buscado = "Carla"
