@@ -1,0 +1,201 @@
+import time
+import random
+
+# --- Jogo da Velha (Exercício 2) ---
+
+def exibir_tabuleiro(t):
+    print("\n  0 1 2")
+    print("-------")
+    for i in range(3):
+        linha = str(i) + " |"
+        for j in range(3):
+            linha += t[i][j] + "|"
+        print(linha)
+        print("-------")
+
+def verificar_vitoria(t, j):
+    for i in range(3):
+        if all(t[i][c] == j for c in range(3)): return True
+        if all(t[r][i] == j for r in range(3)): return True
+
+    if all(t[i][i] == j for i in range(3)): return True
+    if (t[0][2] == j and t[1][1] == j and t[2][0] == j): return True
+    
+    return False
+
+def jogar_velha():
+    print("\n### INÍCIO: Jogo da Velha ###")
+    tabuleiro = [[' ' for _ in range(3)] for _ in range(3)]
+    jogador = 'X'
+    jogadas = 0
+
+    print("Digite a Linha e Coluna (0 a 2).")
+
+    while jogadas < 9:
+        exibir_tabuleiro(tabuleiro)
+
+        try:
+            l = int(input(f"Jogador {jogador}, Linha: "))
+            c = int(input(f"Jogador {jogador}, Coluna: "))
+        except ValueError:
+            print("Entrada inválida. Digite apenas números 0, 1 ou 2.")
+            continue
+        
+        if l not in range(3) or c not in range(3) or tabuleiro[l][c] != ' ':
+            print("Posição inválida ou ocupada. Tente novamente.")
+            continue
+
+        tabuleiro[l][c] = jogador
+        jogadas += 1
+
+        if verificar_vitoria(tabuleiro, jogador):
+            exibir_tabuleiro(tabuleiro)
+            print(f"\nPARABÉNS! O Jogador {jogador} venceu!")
+            break
+        
+        jogador = 'O' if jogador == 'X' else 'X'
+    else:
+        exibir_tabuleiro(tabuleiro)
+        print("\nFIM DE JOGO! Deu Empate.")
+    print("### FIM: Jogo da Velha ###\n")
+
+# --- Sistema de Login (Exercício 5) ---
+
+def login_com_tempo():
+    print("\n### INÍCIO: Sistema de Login ###")
+    senha_correta = "1234"
+    tentativas_max = 3
+    tempo_limite = 30
+    tentativas_restantes = tentativas_max
+    acesso_concedido = False
+
+    inicio_tempo = time.time()
+    tempo_expirado = False
+
+    while tentativas_restantes > 0 and not tempo_expirado:
+        tempo_decorrido = time.time() - inicio_tempo
+        
+        if tempo_decorrido >= tempo_limite:
+            tempo_expirado = True
+            continue
+
+        print(f"\nTentativas restantes: {tentativas_restantes}. Tempo restante: {tempo_limite - int(tempo_decorrido)} segundos.")
+        
+        senha_digitada = input("Digite a senha: ")
+
+        if senha_digitada == senha_correta:
+            acesso_concedido = True
+            break
+        else:
+            tentativas_restantes -= 1
+            print("Senha incorreta.")
+
+    print("\n--- Resultado do Login ---")
+
+    if acesso_concedido:
+        print("Acesso concedido. Bem-vindo!")
+    elif tempo_expirado:
+        print("Acesso negado. O tempo limite de 30 segundos foi atingido.")
+    else:
+        print("Acesso negado. Você excedeu o número máximo de 3 tentativas.")
+    print("### FIM: Sistema de Login ###\n")
+
+# --- Jogo da Forca Ampliado (Exercício 8) ---
+
+def desenhar_forca(erros):
+    estagios = [
+        """
+        +---+
+            |
+            |
+            |
+            ===""",
+        """
+        +---+
+        O   |
+            |
+            |
+            ===""",
+        """
+        +---+
+        O   |
+        |   |
+            |
+            ===""",
+        """
+        +---+
+        O   |
+       /|   |
+            |
+            ===""",
+        """
+        +---+
+        O   |
+       /|\\  |
+            |
+            ===""",
+        """
+        +---+
+        O   |
+       /|\\  |
+       /    |
+            ===""",
+        """
+        +---+
+        O   |
+       /|\\  |
+       / \\  |
+            ==="""
+    ]
+    print(estagios[erros])
+
+def jogar_forca():
+    print("\n### INÍCIO: Jogo da Forca ###")
+    palavra_secreta = "PYTHON"
+    letras_certas = []
+    letras_erradas = []
+    max_erros = 6
+    
+    while True:
+        erros_cometidos = len(letras_erradas)
+        
+        desenhar_forca(erros_cometidos)
+        print(f"Letras erradas: {letras_erradas}")
+        
+        palavra_display = ""
+        for letra in palavra_secreta:
+            if letra in letras_certas:
+                palavra_display += letra + " "
+            else:
+                palavra_display += "_ "
+        print(palavra_display)
+
+        if "_" not in palavra_display:
+            print("\nParabéns! Você venceu! A palavra era:", palavra_secreta)
+            break
+
+        if erros_cometidos >= max_erros:
+            desenhar_forca(max_erros)
+            print("\nVocê perdeu! A palavra era:", palavra_secreta)
+            break
+            
+        tentativa = input("\nDigite uma letra: ").upper()
+        
+        if len(tentativa) != 1 or not tentativa.isalpha():
+            print("Entrada inválida. Digite apenas uma letra.")
+            continue
+
+        if tentativa in letras_certas or tentativa in letras_erradas:
+            print("Você já tentou esta letra.")
+            continue
+            
+        if tentativa in palavra_secreta:
+            letras_certas.append(tentativa)
+        else:
+            letras_erradas.append(tentativa)
+    print("### FIM: Jogo da Forca ###\n")
+
+
+# --- Menu Principal para executar os jogos/sistemas ---
+
+def menu
